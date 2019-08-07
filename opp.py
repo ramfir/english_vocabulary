@@ -448,6 +448,7 @@ def name_meaning():
 def back():
     global firm, form, english, wrong_answers
     wrong_answers = 0
+    form.label_2.setText(str(wrong_answers))
     english = False
     form.hide()
     firm.show()
