@@ -1,4 +1,3 @@
-#laskfjlaskdfj
 from PyQt4 import QtGui, QtCore
 import sys, words, random, start_page
 
@@ -49,388 +48,80 @@ def func_for_file():
         else:
             my_dict[ran[i]].setText(five_words[i][2])
 
+def buttons_listener(pushButton, button_index, a, b):
+    global flag, result, my_dict, five_words, form, wrong_answers, english, form
+    check = ""
+    secondcheck = ""
+    thirdcheck = ""
+    if flag in range(a, b):
+        w = str(my_dict[flag].text())
+        ind = -1
+        for i in range(5):
+            if (a == 6):
+                secondcheck = five_words[i][2]
+            elif (a == 1):
+                secondcheck = five_words[i][0]
+            if english:
+                if (five_words[i].find(w) != -1):
+                    ind = i
+                    break
+            else:
+                if (secondcheck == w):
+                    ind = i
+                    break
+        if (a == 6 and english):
+            check = five_words[ind][:five_words[ind].find('--')]
+        elif (a == 6 and (not english)):
+            thirdcheck = five_words[ind][0]
+        elif (a == 1 and english):
+            check = five_words[ind][five_words[ind].find('--') + 2:]
+        elif (a == 1 and (not english)):
+            thirdcheck = five_words[ind][2]
+        if (english and str(pushButton.text()) == check):
+            pushButton.setVisible(False)
+            my_dict[flag].setVisible(False)
+            result += 1
+            if result == 5:
+                QtGui.QMessageBox.information(form, "Result", "Amount of wrong answers: " + str(wrong_answers), QtGui.QMessageBox.Ok)
+                func_for_file()
+            flag = 0
+        elif (not english and str(pushButton.text()) == thirdcheck):
+            pushButton.setVisible(False)
+            my_dict[flag].setVisible(False)
+            result += 1
+            if result == 5:
+                QtGui.QMessageBox.information(form, "Result", "Amount of wrong answers: " + str(wrong_answers), QtGui.QMessageBox.Ok)
+                func_for_file()
+            flag = 0
+        else:
+            form.label_2.setText(str(int(form.label_2.text()) + 1))
+            wrong_answers += 1
+    else:
+        if flag != 0:
+            my_dict[flag].setEnabled(True)
+        pushButton.setEnabled(False)
+        flag = button_index
+
 def one():
-    global flag, result, my_dict, five_words, form, wrong_answers, english, form
-    if flag in range(6, 11):
-        w = str(my_dict[flag].text())
-        ind = -1
-        for i in range(5):
-            if english:
-                if (five_words[i].find(w) != -1):
-                    ind = i
-                    break
-            else:
-                if (five_words[i][2] == w):
-                    ind = i
-                    break
-        if (english and str(form.pushButton.text()) == five_words[ind][:five_words[ind].find('--')]):
-            form.pushButton.setVisible(False)
-            my_dict[flag].setVisible(False)
-            result += 1
-            if result == 5:
-                QtGui.QMessageBox.information(form, "Result", "Amount of wrong answers: " + str(wrong_answers), QtGui.QMessageBox.Ok)
-                func_for_file()
-            flag = 0
-        elif (not english and str(form.pushButton.text()) == five_words[ind][0]):
-            form.pushButton.setVisible(False)
-            my_dict[flag].setVisible(False)
-            result += 1
-            if result == 5:
-                QtGui.QMessageBox.information(form, "Result", "Amount of wrong answers: " + str(wrong_answers), QtGui.QMessageBox.Ok)
-                func_for_file()
-            flag = 0
-        else:
-            form.label_2.setText(str(int(form.label_2.text()) + 1))
-            wrong_answers += 1
-
-    else:
-        if flag != 0:
-            my_dict[flag].setEnabled(True)
-        form.pushButton.setEnabled(False)
-        flag = 1
-
+    buttons_listener(form.pushButton, 1, 6, 11)
 def two():
-    global flag, result, my_dict, five_words, form, wrong_answers, english, form
-    if flag in range(6, 11):
-        w = str(my_dict[flag].text())
-        ind = -1
-        for i in range(5):
-            if english:
-                if (five_words[i].find(w) != -1):
-                    ind = i
-                    break
-            else:
-                if (five_words[i][2] == w):
-                    ind = i
-                    break
-        if (english and str(form.pushButton_2.text()) == five_words[ind][:five_words[ind].find('--')]):
-            form.pushButton_2.setVisible(False)
-            my_dict[flag].setVisible(False)
-            result += 1
-            if result == 5:
-                QtGui.QMessageBox.information(form, "Result", "Amount of wrong answers: " + str(wrong_answers), QtGui.QMessageBox.Ok)
-                func_for_file()
-            flag = 0
-        elif (not english and str(form.pushButton_2.text()) == five_words[ind][0]):
-            form.pushButton_2.setVisible(False)
-            my_dict[flag].setVisible(False)
-            result += 1
-            if result == 5:
-                QtGui.QMessageBox.information(form, "Result", "Amount of wrong answers: " + str(wrong_answers), QtGui.QMessageBox.Ok)
-                func_for_file()
-            flag = 0
-        else:
-            form.label_2.setText(str(int(form.label_2.text()) + 1))
-            wrong_answers += 1
-    else:
-        if flag != 0:
-            my_dict[flag].setEnabled(True)
-        form.pushButton_2.setEnabled(False)
-        flag = 2
+    buttons_listener(form.pushButton_2, 2, 6, 11)
 def three():
-    global flag, result, my_dict, five_words, form, wrong_answers, english, form
-    if flag in range(6, 11):
-        w = str(my_dict[flag].text())
-        ind = -1
-        for i in range(5):
-            if english:
-                if (five_words[i].find(w) != -1):
-                    ind = i
-                    break
-            else:
-                if (five_words[i][2] == w):
-                    ind = i
-                    break
-        if (english and str(form.pushButton_3.text()) == five_words[ind][:five_words[ind].find('--')]):
-            form.pushButton_3.setVisible(False)
-            my_dict[flag].setVisible(False)
-            result += 1
-            if result == 5:
-                QtGui.QMessageBox.information(form, "Result", "Amount of wrong answers: " + str(wrong_answers), QtGui.QMessageBox.Ok)
-                func_for_file()
-            flag = 0
-        elif (not english and str(form.pushButton_3.text()) == five_words[ind][0]):
-            form.pushButton_3.setVisible(False)
-            my_dict[flag].setVisible(False)
-            result += 1
-            if result == 5:
-                QtGui.QMessageBox.information(form, "Result", "Amount of wrong answers: " + str(wrong_answers), QtGui.QMessageBox.Ok)
-                func_for_file()
-            flag = 0
-        else:
-            form.label_2.setText(str(int(form.label_2.text()) + 1))
-            wrong_answers += 1
-    else:
-        if flag != 0:
-            my_dict[flag].setEnabled(True)
-        form.pushButton_3.setEnabled(False)
-        flag = 3
+    buttons_listener(form.pushButton_3, 3, 6, 11)
 def four():
-    global flag, result, my_dict, five_words, form, wrong_answers, english, form
-    if flag in range(6, 11):
-        w = str(my_dict[flag].text())
-        ind = -1
-        for i in range(5):
-            if english:
-                if (five_words[i].find(w) != -1):
-                    ind = i
-                    break
-            else:
-                if (five_words[i][2] == w):
-                    ind = i
-                    break
-        if (english and str(form.pushButton_4.text()) == five_words[ind][:five_words[ind].find('--')]):
-            form.pushButton_4.setVisible(False)
-            my_dict[flag].setVisible(False)
-            result += 1
-            if result == 5:
-                QtGui.QMessageBox.information(form, "Result", "Amount of wrong answers: " + str(wrong_answers), QtGui.QMessageBox.Ok)
-                func_for_file()
-            flag = 0
-        elif (not english and str(form.pushButton_4.text()) == five_words[ind][0]):
-            form.pushButton_4.setVisible(False)
-            my_dict[flag].setVisible(False)
-            result += 1
-            if result == 5:
-                QtGui.QMessageBox.information(form, "Result", "Amount of wrong answers: " + str(wrong_answers), QtGui.QMessageBox.Ok)
-                func_for_file()
-            flag = 0
-        else:
-            form.label_2.setText(str(int(form.label_2.text()) + 1))
-            wrong_answers += 1
-    else:
-        if flag != 0:
-            my_dict[flag].setEnabled(True)
-        form.pushButton_4.setEnabled(False)
-        flag = 4
+    buttons_listener(form.pushButton_4, 4, 6, 11)
 def five():
-    global flag, result, my_dict, five_words, form, wrong_answers, english, form
-    if flag in range(6, 11):
-        w = str(my_dict[flag].text())
-        ind = -1
-        for i in range(5):
-            if english:
-                if (five_words[i].find(w) != -1):
-                    ind = i
-                    break
-            else:
-                if (five_words[i][2] == w):
-                    ind = i
-                    break
-        if (english and str(form.pushButton_5.text()) == five_words[ind][:five_words[ind].find('--')]):
-            form.pushButton_5.setVisible(False)
-            my_dict[flag].setVisible(False)
-            result += 1
-            if result == 5:
-                QtGui.QMessageBox.information(form, "Result", "Amount of wrong answers: " + str(wrong_answers), QtGui.QMessageBox.Ok)
-                func_for_file()
-            flag = 0
-        elif (not english and str(form.pushButton_5.text()) == five_words[ind][0]):
-            form.pushButton_5.setVisible(False)
-            my_dict[flag].setVisible(False)
-            result += 1
-            if result == 5:
-                QtGui.QMessageBox.information(form, "Result", "Amount of wrong answers: " + str(wrong_answers), QtGui.QMessageBox.Ok)
-                func_for_file()
-            flag = 0
-        else:
-            form.label_2.setText(str(int(form.label_2.text()) + 1))
-            wrong_answers += 1
-    else:
-        if flag != 0:
-            my_dict[flag].setEnabled(True)
-        form.pushButton_5.setEnabled(False)
-        flag = 5
+    buttons_listener(form.pushButton_5, 5, 6, 11)
 def six():
-    global flag, result, my_dict, five_words, form, wrong_answers, english, form
-    if flag in range(1, 6):
-        w = str(my_dict[flag].text())
-        ind = -1
-        for i in range(5):
-            if english:
-                if (five_words[i].find(w) != -1):
-                    ind = i
-                    break
-            else:
-                if (five_words[i][0] == w):
-                    ind = i
-                    break
-        if (english and str(form.pushButton_6.text()) == five_words[ind][five_words[ind].find('--') + 2:]):
-            form.pushButton_6.setVisible(False)
-            my_dict[flag].setVisible(False)
-            result += 1
-            if result == 5:
-                QtGui.QMessageBox.information(form, "Result", "Amount of wrong answers: " + str(wrong_answers), QtGui.QMessageBox.Ok)
-                func_for_file()
-            flag = 0
-        elif (not english and str(form.pushButton_6.text()) == five_words[ind][2]):
-            form.pushButton_6.setVisible(False)
-            my_dict[flag].setVisible(False)
-            result += 1
-            if result == 5:
-                QtGui.QMessageBox.information(form, "Result", "Amount of wrong answers: " + str(wrong_answers), QtGui.QMessageBox.Ok)
-                func_for_file()
-            flag = 0
-        else:
-            form.label_2.setText(str(int(form.label_2.text()) + 1))
-            wrong_answers += 1
-    else:
-        if flag != 0:
-            my_dict[flag].setEnabled(True)
-        form.pushButton_6.setEnabled(False)
-        flag = 6
+    buttons_listener(form.pushButton_6, 6, 1, 6)
 def seven():
-    global flag, result, my_dict, five_words, form, wrong_answers, english, form
-    if flag in range(1, 6):
-        w = str(my_dict[flag].text())
-        ind = -1
-        for i in range(5):
-            if english:
-                if (five_words[i].find(w) != -1):
-                    ind = i
-                    break
-            else:
-                if (five_words[i][0] == w):
-                    ind = i
-                    break
-        if (english and str(form.pushButton_7.text()) == five_words[ind][five_words[ind].find('--') + 2:]):
-            form.pushButton_7.setVisible(False)
-            my_dict[flag].setVisible(False)
-            result += 1
-            if result == 5:
-                QtGui.QMessageBox.information(form, "Result", "Amount of wrong answers: " + str(wrong_answers), QtGui.QMessageBox.Ok)
-                func_for_file()
-            flag = 0
-        elif (not english and str(form.pushButton_7.text()) == five_words[ind][2]):
-            form.pushButton_7.setVisible(False)
-            my_dict[flag].setVisible(False)
-            result += 1
-            if result == 5:
-                QtGui.QMessageBox.information(form, "Result", "Amount of wrong answers: " + str(wrong_answers), QtGui.QMessageBox.Ok)
-                func_for_file()
-            flag = 0
-        else:
-            form.label_2.setText(str(int(form.label_2.text()) + 1))
-            wrong_answers += 1
-    else:
-        if flag != 0:
-            my_dict[flag].setEnabled(True)
-        form.pushButton_7.setEnabled(False)
-        flag = 7
+    buttons_listener(form.pushButton_7, 7, 1, 6)
 def eight():
-    global flag, result, my_dict, five_words, form, wrong_answers, english, form
-    if flag in range(1, 6):
-        w = str(my_dict[flag].text())
-        ind = -1
-        for i in range(5):
-            if english:
-                if (five_words[i].find(w) != -1):
-                    ind = i
-                    break
-            else:
-                if (five_words[i][0] == w):
-                    ind = i
-                    break
-        if (english and str(form.pushButton_8.text()) == five_words[ind][five_words[ind].find('--') + 2:]):
-            form.pushButton_8.setVisible(False)
-            my_dict[flag].setVisible(False)
-            result += 1
-            if result == 5:
-                QtGui.QMessageBox.information(form, "Result", "Amount of wrong answers: " + str(wrong_answers), QtGui.QMessageBox.Ok)
-                func_for_file()
-            flag = 0
-        elif (not english and str(form.pushButton_8.text()) == five_words[ind][2]):
-            form.pushButton_8.setVisible(False)
-            my_dict[flag].setVisible(False)
-            result += 1
-            if result == 5:
-                QtGui.QMessageBox.information(form, "Result", "Amount of wrong answers: " + str(wrong_answers), QtGui.QMessageBox.Ok)
-                func_for_file()
-            flag = 0
-        else:
-            form.label_2.setText(str(int(form.label_2.text()) + 1))
-            wrong_answers += 1
-    else:
-        if flag != 0:
-            my_dict[flag].setEnabled(True)
-        form.pushButton_8.setEnabled(False)
-        flag = 8
+    buttons_listener(form.pushButton_8, 8, 1, 6)
 def nine():
-    global flag, result, my_dict, five_words, form, wrong_answers, english, form
-    if flag in range(1, 6):
-        w = str(my_dict[flag].text())
-        ind = -1
-        for i in range(5):
-            if english:
-                if (five_words[i].find(w) != -1):
-                    ind = i
-                    break
-            else:
-                if (five_words[i][0] == w):
-                    ind = i
-                    break
-        if (english and str(form.pushButton_9.text()) == five_words[ind][five_words[ind].find('--') + 2:]):
-            form.pushButton_9.setVisible(False)
-            my_dict[flag].setVisible(False)
-            result += 1
-            if result == 5:
-                QtGui.QMessageBox.information(form, "Result", "Amount of wrong answers: " + str(wrong_answers), QtGui.QMessageBox.Ok)
-                func_for_file()
-            flag = 0
-        elif (not english and str(form.pushButton_9.text()) == five_words[ind][2]):
-            form.pushButton_9.setVisible(False)
-            my_dict[flag].setVisible(False)
-            result += 1
-            if result == 5:
-                QtGui.QMessageBox.information(form, "Result", "Amount of wrong answers: " + str(wrong_answers), QtGui.QMessageBox.Ok)
-                func_for_file()
-            flag = 0
-        else:
-            form.label_2.setText(str(int(form.label_2.text()) + 1))
-            wrong_answers += 1
-    else:
-        if flag != 0:
-            my_dict[flag].setEnabled(True)
-        form.pushButton_9.setEnabled(False)
-        flag = 9
+    buttons_listener(form.pushButton_9, 9, 1, 6)
 def ten():
-    global flag, result, my_dict, five_words, form, wrong_answers, english, form
-    if flag in range(1, 6):
-        w = str(my_dict[flag].text())
-        ind = -1
-        for i in range(5):
-            if english:
-                if (five_words[i].find(w) != -1):
-                    ind = i
-                    break
-            else:
-                if (five_words[i][0] == w):
-                    ind = i
-                    break
-        if (english and str(form.pushButton_10.text()) == five_words[ind][five_words[ind].find('--') + 2:]):
-            form.pushButton_10.setVisible(False)
-            my_dict[flag].setVisible(False)
-            result += 1
-            if result == 5:
-                QtGui.QMessageBox.information(form, "Result", "Amount of wrong answers: " + str(wrong_answers), QtGui.QMessageBox.Ok)
-                func_for_file()
-            flag = 0
-        elif (not english and str(form.pushButton_10.text()) == five_words[ind][2]):
-            form.pushButton_10.setVisible(False)
-            my_dict[flag].setVisible(False)
-            result += 1
-            if result == 5:
-                QtGui.QMessageBox.information(form, "Result", "Amount of wrong answers: " + str(wrong_answers), QtGui.QMessageBox.Ok)
-                func_for_file()
-            flag = 0
-        else:
-            form.label_2.setText(str(int(form.label_2.text()) + 1))
-            wrong_answers += 1
-    else:
-        if flag != 0:
-            my_dict[flag].setEnabled(True)
-        form.pushButton_10.setEnabled(False)
-        flag = 10
+    buttons_listener(form.pushButton_10, 10, 1, 6)
 
 def english_russian():
     global english, firm, form
