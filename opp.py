@@ -1,3 +1,4 @@
+#laskfjlaskdfj
 from PyQt4 import QtGui, QtCore
 import sys, words, random, start_page
 
